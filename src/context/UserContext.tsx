@@ -45,7 +45,7 @@ export const UserProvider =({children}:{children:ReactNode}) =>{
         try {
             const res = await fetch('http://localhost:3000/api/logout');
             if (res.ok) {
-                setUser(null); // Update the user state to null on logout
+                setUser(null); 
             }
         } catch (error) {
             console.error('Logout failed:', error);
