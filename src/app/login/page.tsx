@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, FormEvent, useState } from "react";
-
+import { useRouter } from "next/navigation";
 interface User{
     email:string,
     password:string
@@ -12,6 +12,7 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const router = useRouter()
   const [loading, setLoading] = useState<boolean>(false)
  const handleInput=(e:ChangeEvent<HTMLInputElement>)=>{
      setUser({
@@ -32,6 +33,7 @@ async function handleSubmit(e:FormEvent<HTMLFormElement>){
         })
         const data = await res.json()
         if(res.ok){
+            router.push('/todos')
             alert(data.message)
             setLoading(false)
         }else{

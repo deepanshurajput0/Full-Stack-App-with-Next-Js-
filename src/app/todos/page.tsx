@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { BsDot } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
 
+
 interface Creator{
     _id:string,
     name:string,
@@ -21,6 +22,7 @@ interface Todo {
 export default function Todos(){
     const [todos, setTodos] = useState<Todo[]>([])
     const [loading, setLoading] = useState<boolean>(false)
+    
      async function getTodos(){
         try {
             const res = await fetch('http://localhost:3000/api/getTodos')
@@ -87,7 +89,7 @@ export default function Todos(){
     return(
         <div className=" text-white flex justify-evenly" >
          {
-           todos.map((item)=>(
+           todos?.map((item)=>(
             <div key={item._id} className="card bg-base-100 w-96 shadow-xl">
             <div className="card-body">
               <h2 className="card-title">{item.task}</h2>
