@@ -2,20 +2,22 @@
 
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/context/UserContext";
 interface User{
     email:string,
     password:string
 }
 
 export default function Login() {
-  const [user, setUser] = useState<User>({
+  const [user, setUsers] = useState<User>({
     email: "",
     password: "",
   });
+  const { setUser } = useUser()
   const router = useRouter()
   const [loading, setLoading] = useState<boolean>(false)
  const handleInput=(e:ChangeEvent<HTMLInputElement>)=>{
-     setUser({
+     setUsers({
         ...user, [e.target.name]:e.target.value
      })
  }
@@ -33,8 +35,10 @@ async function handleSubmit(e:FormEvent<HTMLFormElement>){
         })
         const data = await res.json()
         if(res.ok){
-            router.push('/todos')
+            setUser(data?.user)
+            router.push('/')
             alert(data.message)
+
             setLoading(false)
         }else{
             alert(data.message)

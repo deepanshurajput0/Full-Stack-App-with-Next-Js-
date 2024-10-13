@@ -1,20 +1,15 @@
 'use client'
 
-import { useEffect, useState } from "react"
-
-interface User {
-    _id:string,
-    name:string,
-    email:string, 
-}
+import { useEffect } from "react"
+import { useUser } from "@/context/UserContext"
 
 export default function Profile(){
-    const [user, setUser] = useState<User>()
+    const { setUser, user } = useUser()
      async function getMe (){
          try {
             const res = await fetch('http://localhost:3000/api/me')
             const data = await res.json()
-            setUser(data?.data)
+            setUser(data.data)
          } catch (error) {
             console.log(error)
          }
