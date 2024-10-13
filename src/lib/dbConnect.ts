@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 type ConnectionObject ={
    isConnected?:number
 }
@@ -24,7 +23,6 @@ async function dbConnect():Promise<void>{
 
 
 export default dbConnect
-
 
 
 

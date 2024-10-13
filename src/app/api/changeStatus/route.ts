@@ -7,7 +7,12 @@ export async function PUT(request:NextRequest){
         await dbConnect()
         const { todoId  } = await request.json();
     
-       const todo = await todoModel.findByIdAndUpdate(todoId,{status:'Completed',isCompleted:true},{new:true})
+       const todo = await todoModel.findOne({_id:todoId})
+       if(todo?.status === 'Pending'){
+        todo.status = 'Completed'
+       }else if(todo?.status === 'Completed'){
+         todo.status = 'Pending'
+       }
         await todo?.save()
        return NextResponse.json({
         message:'Todo Updated Successfully'

@@ -1,5 +1,4 @@
 import mongoose,{Document, Model, Schema, Types} from "mongoose";
-
 interface Todo extends Document{
     task:string,
     description:string,
